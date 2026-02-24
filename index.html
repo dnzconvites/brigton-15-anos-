@@ -177,6 +177,26 @@ document.getElementById("localizacao").onclick = () => {
 fecharModal.onclick = () => {
   modal.style.display = "none";
 };
+
+  // 1. Bloquear o botão direito do mouse
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // 2. Bloquear atalhos de teclado (Ctrl+U, Ctrl+S, F12, etc.)
+  document.addEventListener('keydown', function (event) {
+    // Tecla 'u' (code 85) + CTRL
+    if (event.ctrlKey && event.keyCode === 85) {
+      event.preventDefault();
+    }
+    // Tecla 's' (code 83) + CTRL (evita salvar a página)
+    if (event.ctrlKey && event.keyCode === 83) {
+      event.preventDefault();
+    }
+    // Tecla F12 (code 123)
+    if (event.keyCode === 123) {
+      event.preventDefault();
+    }
+  });
+  
 </script>
 
 </body>
