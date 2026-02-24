@@ -13,6 +13,7 @@ html, body {
   overflow-x: hidden;
 }
 
+/* CONTAINER DO CONVITE */
 .container {
   position: relative;
   max-width: 430px;
@@ -30,22 +31,23 @@ html, body {
   z-index: 5;
 }
 
-/* AJUSTE FINO — BASEADO NA SUA ARTE */
+/* LINHA DE CIMA */
 #confirmar {
-  top: 67%;
+  top: 66%;
   left: 8%;
   width: 38%;
   height: 8%;
 }
 
-#localizacao {
-  top: 67%;
+#dresscode {
+  top: 66%;
   right: 8%;
   width: 38%;
   height: 8%;
 }
 
-#dresscode {
+/* LINHA DE BAIXO */
+#localizacao {
   top: 77%;
   left: 8%;
   width: 38%;
@@ -59,7 +61,7 @@ html, body {
   height: 8%;
 }
 
-/* VÍDEO CINEMATOGRÁFICO */
+/* OVERLAY DO VÍDEO */
 #overlayVideo {
   position: fixed;
   inset: 0;
@@ -78,17 +80,20 @@ html, body {
 
 <body>
 
+<!-- MÚSICA DE FUNDO -->
 <audio id="musica" src="assets/musica.mp3" loop></audio>
 
+<!-- CONVITE -->
 <div class="container">
   <img src="assets/convite.png" alt="Convite 15 Anos">
 
   <div id="confirmar" class="botao" onclick="confirmar()"></div>
-  <div id="localizacao" class="botao" onclick="localizacao()"></div>
   <div id="dresscode" class="botao" onclick="dresscode()"></div>
+  <div id="localizacao" class="botao" onclick="localizacao()"></div>
   <div id="presentes" class="botao" onclick="presentes()"></div>
 </div>
 
+<!-- VÍDEO CINEMATOGRÁFICO -->
 <div id="overlayVideo">
   <video id="video" src="assets/video.mp4"></video>
 </div>
@@ -100,6 +105,7 @@ const overlay = document.getElementById("overlayVideo");
 
 let iniciou = false;
 
+/* INICIA AO PRIMEIRO TOQUE */
 document.body.addEventListener("click", () => {
   if (!iniciou) {
     musica.volume = 0.6;
@@ -115,21 +121,23 @@ function iniciarVideo() {
   video.play();
 }
 
+/* FINAL DO VÍDEO */
 video.onended = () => {
   overlay.style.display = "none";
   musica.volume = 0.6;
 };
 
+/* AÇÕES DOS BOTÕES */
 function confirmar() {
   window.open("https://wa.me/5511989957305", "_blank");
 }
 
-function localizacao() {
-  window.open("https://maps.app.goo.gl/GgeUipba6Sqq5GUK9", "_blank");
-}
-
 function dresscode() {
   alert("Traje social elegante 🌸");
+}
+
+function localizacao() {
+  window.open("https://maps.app.goo.gl/xTTGQjGMMPpvP6Yt5", "_blank");
 }
 
 function presentes() {
