@@ -56,38 +56,61 @@ html, body {
   position: absolute;
   z-index: 10;
   cursor: pointer;
-  background: rgba(255,0,0,0.3); /* só para teste visual, depois remover */
+  /* REMOVIDO fundo vermelho, agora invisível */
 }
 
-/* Posicionamento dos botões - subindo mais */
-/* BOTÕES AJUSTADOS MAIS PARA CIMA */
+/* Posicionamento dos botões */
 #confirmar {
-  top: 50%;   /* antes 55%, subimos mais */
+  top: 50%;
   left: 8%;
   width: 38%;
   height: 8%;
 }
 
 #dresscode {
-  top: 50%;   /* antes 55%, subimos mais */
+  top: 50%;
   right: 8%;
   width: 38%;
   height: 8%;
 }
 
 #localizacao {
-  top: 63%;   /* antes 66%, subimos um pouco */
+  top: 63%;
   left: 8%;
   width: 38%;
   height: 8%;
 }
 
 #presentes {
-  top: 63%;   /* antes 66%, subimos um pouco */
+  top: 63%;
   right: 8%;
   width: 38%;
   height: 8%;
 }
+
+/* MODAL PARA IMAGENS */
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalImg {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+#fecharModal {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -114,12 +137,21 @@ html, body {
   <div id="presentes" class="botao"></div>
 </div>
 
+<!-- MODAL PARA DRESS CODE E PRESENTES -->
+<div id="modal">
+  <span id="fecharModal">✖</span>
+  <img id="modalImg" src="">
+</div>
+
 <script>
 const capa = document.getElementById("capa");
 const videoContainer = document.getElementById("videoContainer");
 const video = document.getElementById("video");
 const convite = document.getElementById("convite");
 const musica = document.getElementById("musica");
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modalImg");
+const fecharModal = document.getElementById("fecharModal");
 
 /* ===== ETAPA 1: clicar na capa ===== */
 capa.addEventListener("click", () => {
@@ -142,22 +174,33 @@ video.onended = () => {
 
 // Botão Confirmação - abre WhatsApp com mensagem pronta
 document.getElementById("confirmar").onclick = () => {
-  window.location.href = "https://wa.me/5511989957305?text=Olá%20gostaria%20de%20confirmar%20minha%20presença!";
+  // ➤ MODIFICAR AQUI: colocar número real do WhatsApp
+  window.location.href = "https://wa.me/55SEUNUMEROAQUI?text=Olá%20gostaria%20de%20confirmar%20minha%20presença!";
 };
 
-// Botão Dress Code - abre imagem PNG em nova aba
+// Botão Dress Code - abre imagem no modal
 document.getElementById("dresscode").onclick = () => {
-  window.open("assets/dresscode.png", "_blank"); // Substitua pelo seu PNG
+  // ➤ MODIFICAR AQUI: colocar nome da imagem do Dress Code
+  modalImg.src = "assets/dresscode.png";
+  modal.style.display = "flex";
 };
 
 // Botão Localização - abre Google Maps
 document.getElementById("localizacao").onclick = () => {
-  window.location.href = "https://maps.app.goo.gl/R1HPwwBndqXfZ7s5A"; // Substitua pelo endereço real
+  // ➤ MODIFICAR AQUI: colocar endereço real para Maps
+  window.location.href = "https://www.google.com/maps/search/?api=1&query=ENDERECO_AQUI";
 };
 
-// Botão Presentes - abre imagem PNG em nova aba
+// Botão Presentes - abre imagem no modal
 document.getElementById("presentes").onclick = () => {
-  window.open("assets/presentes.png", "_blank"); // Substitua pelo seu PNG
+  // ➤ MODIFICAR AQUI: colocar nome da imagem da sugestão de presentes
+  modalImg.src = "assets/presentes.png";
+  modal.style.display = "flex";
+};
+
+// Fechar modal
+fecharModal.onclick = () => {
+  modal.style.display = "none";
 };
 </script>
 
