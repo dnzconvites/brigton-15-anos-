@@ -2,141 +2,138 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>15 Anos – Bridgerton</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite 15 Anos</title>
 
 <style>
-* {
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: #0d1b2a;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
+  background: #000;
+  overflow-x: hidden;
 }
 
 .container {
   position: relative;
-  width: 100%;
   max-width: 430px;
+  margin: auto;
 }
 
-/* imagem principal (com botões desenhados) */
 .container img {
   width: 100%;
   display: block;
 }
 
-/* hotspots invisíveis */
-.hotspot {
+/* BOTÕES INVISÍVEIS */
+.botao {
   position: absolute;
-  cursor: pointer;
+  z-index: 5;
 }
 
-/* ===== MAPEAMENTO DOS BOTÕES ===== */
-/* (baseado na sua imagem enviada) */
-
-/* BOTÃO 1 – CONFIRMAR PRESENÇA */
-#btn-confirmar {
-  top: 64%;
-  left: 12%;
-  width: 76%;
-  height: 6%;
+/* AJUSTE FINO — BASEADO NA SUA ARTE */
+#confirmar {
+  top: 67%;
+  left: 8%;
+  width: 38%;
+  height: 8%;
 }
 
-/* BOTÃO 2 – DRESS CODE */
-#btn-dress {
-  top: 71%;
-  left: 12%;
-  width: 76%;
-  height: 6%;
+#localizacao {
+  top: 67%;
+  right: 8%;
+  width: 38%;
+  height: 8%;
 }
 
-/* BOTÃO 3 – LOCALIZAÇÃO */
-#btn-local {
-  top: 78%;
-  left: 12%;
-  width: 76%;
-  height: 6%;
+#dresscode {
+  top: 77%;
+  left: 8%;
+  width: 38%;
+  height: 8%;
 }
 
-/* BOTÃO 4 – PRESENTES */
-#btn-presentes {
-  top: 85%;
-  left: 12%;
-  width: 76%;
-  height: 6%;
+#presentes {
+  top: 77%;
+  right: 8%;
+  width: 38%;
+  height: 8%;
+}
+
+/* VÍDEO CINEMATOGRÁFICO */
+#overlayVideo {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  z-index: 999;
+}
+
+#overlayVideo video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
 </head>
 
 <body>
 
+<audio id="musica" src="assets/musica.mp3" loop></audio>
+
 <div class="container">
+  <img src="assets/convite.png" alt="Convite 15 Anos">
 
-  <!-- 🎵 Música -->
-  <audio id="bgMusic" src="assets/musica.mp3" loop></audio>
+  <div id="confirmar" class="botao" onclick="confirmar()"></div>
+  <div id="localizacao" class="botao" onclick="localizacao()"></div>
+  <div id="dresscode" class="botao" onclick="dresscode()"></div>
+  <div id="presentes" class="botao" onclick="presentes()"></div>
+</div>
 
-  <!-- 🎬 Vídeo Lady Whistledown -->
-  <video id="introVideo" src="assets/video.mp4" playsinline controls style="width:100%"></video>
-
-  <!-- 🖼️ Arte ORIGINAL (não mexe nela) -->
-  <img src="assets/convite.png" alt="Convite 15 anos Bridgerton">
-
-  <!-- 🔘 Hotspots invisíveis -->
-  <div id="btn-confirmar" class="hotspot" onclick="confirmar()"></div>
-  <div id="btn-dress" class="hotspot" onclick="abrirDress()"></div>
-  <div id="btn-local" class="hotspot" onclick="abrirMapa()"></div>
-  <div id="btn-presentes" class="hotspot" onclick="abrirPresentes()"></div>
-
+<div id="overlayVideo">
+  <video id="video" src="assets/video.mp4"></video>
 </div>
 
 <script>
-const bgMusic = document.getElementById("bgMusic");
-const video = document.getElementById("introVideo");
+const musica = document.getElementById("musica");
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlayVideo");
 
-/* volumes */
-const MUSIC_NORMAL = 0.6;
-const MUSIC_LOW = 0.15;
+let iniciou = false;
 
-/* inicia música no primeiro toque */
-document.addEventListener("click", () => {
-  if (bgMusic.paused) {
-    bgMusic.volume = MUSIC_NORMAL;
-    bgMusic.play();
+document.body.addEventListener("click", () => {
+  if (!iniciou) {
+    musica.volume = 0.6;
+    musica.play();
+    iniciarVideo();
+    iniciou = true;
   }
-}, { once: true });
-
-/* abaixa música durante o vídeo */
-video.addEventListener("play", () => {
-  bgMusic.volume = MUSIC_LOW;
 });
 
-/* restaura música ao final */
-video.addEventListener("ended", () => {
-  bgMusic.volume = MUSIC_NORMAL;
-});
+function iniciarVideo() {
+  overlay.style.display = "block";
+  musica.volume = 0.15;
+  video.play();
+}
 
-/* ===== AÇÕES DOS BOTÕES ===== */
+video.onended = () => {
+  overlay.style.display = "none";
+  musica.volume = 0.6;
+};
 
 function confirmar() {
-  window.location.href = "https://wa.me/5511989957305";
+  window.open("https://wa.me/5511989957305", "_blank");
 }
 
-function abrirMapa() {
-  window.open("hhttps://maps.app.goo.gl/XgHkBQdaodyrNbBf7", "_blank");
+function localizacao() {
+  window.open("https://maps.app.goo.gl/GgeUipba6Sqq5GUK9", "_blank");
 }
 
-function abrirDress() {
-  alert("Aqui você pode abrir a tela de Dress Code");
+function dresscode() {
+  alert("Traje social elegante 🌸");
 }
 
-function abrirPresentes() {
-  alert("Aqui você pode abrir a tela de Presentes");
+function presentes() {
+  alert("Lista de presentes em breve 🎁");
 }
 </script>
 
