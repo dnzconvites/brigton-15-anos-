@@ -10,28 +10,53 @@ html, body {
   margin: 0;
   padding: 0;
   background: #000;
-  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-/* CONTAINER DO CONVITE */
-.container {
-  position: relative;
+/* CAPA */
+#capa {
+  position: fixed;
+  inset: 0;
+  background: url("assets/capa.png") no-repeat center;
+  background-size: cover;
+  z-index: 1000;
+}
+
+/* VÍDEO */
+#videoContainer {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  z-index: 900;
+}
+
+#videoContainer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CONVITE */
+#convite {
+  display: none;
   max-width: 430px;
   margin: auto;
+  position: relative;
 }
 
-.container img {
+#convite img {
   width: 100%;
   display: block;
 }
 
-/* BOTÕES INVISÍVEIS */
+/* BOTÕES */
 .botao {
   position: absolute;
-  z-index: 5;
+  z-index: 10;
 }
 
-/* LINHA DE CIMA */
 #confirmar {
   top: 66%;
   left: 8%;
@@ -46,7 +71,6 @@ html, body {
   height: 8%;
 }
 
-/* LINHA DE BAIXO */
 #localizacao {
   top: 77%;
   left: 8%;
@@ -60,89 +84,72 @@ html, body {
   width: 38%;
   height: 8%;
 }
-
-/* OVERLAY DO VÍDEO */
-#overlayVideo {
-  position: fixed;
-  inset: 0;
-  background: black;
-  display: none;
-  z-index: 999;
-}
-
-#overlayVideo video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 </style>
 </head>
 
 <body>
 
-<!-- MÚSICA DE FUNDO -->
 <audio id="musica" src="assets/musica.mp3" loop></audio>
 
-<!-- CONVITE -->
-<div class="container">
-  <img src="assets/convite.png" alt="Convite 15 Anos">
+<!-- CAPA -->
+<div id="capa"></div>
 
-  <div id="confirmar" class="botao" onclick="confirmar()"></div>
-  <div id="dresscode" class="botao" onclick="dresscode()"></div>
-  <div id="localizacao" class="botao" onclick="localizacao()"></div>
-  <div id="presentes" class="botao" onclick="presentes()"></div>
-</div>
-
-<!-- VÍDEO CINEMATOGRÁFICO -->
-<div id="overlayVideo">
+<!-- VÍDEO -->
+<div id="videoContainer">
   <video id="video" src="assets/video.mp4"></video>
 </div>
 
+<!-- CONVITE -->
+<div id="convite">
+  <img src="assets/convite.png">
+
+  <div id="confirmar" class="botao"></div>
+  <div id="dresscode" class="botao"></div>
+  <div id="localizacao" class="botao"></div>
+  <div id="presentes" class="botao"></div>
+</div>
+
 <script>
-const musica = document.getElementById("musica");
+const capa = document.getElementById("capa");
+const videoContainer = document.getElementById("videoContainer");
 const video = document.getElementById("video");
-const overlay = document.getElementById("overlayVideo");
+const convite = document.getElementById("convite");
+const musica = document.getElementById("musica");
 
-let iniciou = false;
+/* ===== ETAPA 1: clicar na capa ===== */
+capa.addEventListener("click", () => {
+  capa.style.display = "none";
+  videoContainer.style.display = "block";
 
-/* INICIA AO PRIMEIRO TOQUE */
-document.body.addEventListener("click", () => {
-  if (!iniciou) {
-    musica.volume = 0.6;
-    musica.play();
-    iniciarVideo();
-    iniciou = true;
-  }
+  musica.volume = 0.15;
+  musica.play();
+  video.play();
 });
 
-function iniciarVideo() {
-  overlay.style.display = "block";
-  musica.volume = 0.15;
-  video.play();
-}
-
-/* FINAL DO VÍDEO */
+/* ===== ETAPA 2: vídeo terminou ===== */
 video.onended = () => {
-  overlay.style.display = "none";
+  videoContainer.style.display = "none";
+  convite.style.display = "block";
   musica.volume = 0.6;
 };
 
-/* AÇÕES DOS BOTÕES */
-function confirmar() {
-  window.open("https://wa.me/5511989957305", "_blank");
-}
+/* ===== BOTÕES ===== */
+document.getElementById("confirmar").onclick = () => {
+  window.location.href = "https://wa.me/SEUNUMEROAQUI";
+};
 
-function dresscode() {
+document.getElementById("dresscode").onclick = () => {
   alert("Traje social elegante 🌸");
-}
+};
 
-function localizacao() {
-  window.open("https://maps.app.goo.gl/xTTGQjGMMPpvP6Yt5", "_blank");
-}
+document.getElementById("localizacao").onclick = () => {
+  window.location.href =
+    "https://www.google.com/maps/search/?api=1&query=ENDERECO_AQUI";
+};
 
-function presentes() {
-  alert("Lista de presentes em breve 🎁");
-}
+document.getElementById("presentes").onclick = () => {
+  alert("Sugestão de presente 🎁");
+};
 </script>
 
 </body>
