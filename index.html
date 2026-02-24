@@ -55,36 +55,37 @@ html, body {
 .botao {
   position: absolute;
   z-index: 10;
+  cursor: pointer;
+  background: rgba(255,0,0,0.3); /* só para teste visual, depois remover */
 }
 
-/* Posicionamento dos botões */
+/* Posicionamento dos botões - subindo mais */
 #confirmar {
-  top: 60%;   /* antes estava 66% */
+  top: 55%;
   left: 8%;
   width: 38%;
   height: 8%;
 }
 
 #dresscode {
-  top: 60%;   /* antes estava 66% */
+  top: 55%;
   right: 8%;
   width: 38%;
   height: 8%;
 }
 
 #localizacao {
-  top: 71%;   /* antes estava 77% */
+  top: 66%;
   left: 8%;
   width: 38%;
   height: 8%;
 }
 
 #presentes {
-  top: 71%;   /* antes estava 77% */
+  top: 66%;
   right: 8%;
   width: 38%;
   height: 8%;
-}
 }
 </style>
 </head>
@@ -137,24 +138,24 @@ video.onended = () => {
 
 /* ===== BOTÕES ===== */
 
-// Botão Confirmação - abre WhatsApp
+// Botão Confirmação - abre WhatsApp com mensagem pronta
 document.getElementById("confirmar").onclick = () => {
-  window.location.href = "https://wa.me/5511989957305"; // Substitua pelo número real
+  window.location.href = "https://wa.me/5511989957305?text=Olá%20gostaria%20de%20confirmar%20minha%20presença!";
 };
 
 // Botão Dress Code - abre imagem PNG em nova aba
 document.getElementById("dresscode").onclick = () => {
-  window.open("dresscode.png", "_blank"); // Substitua pelo seu PNG
+  window.open("assets/dresscode.png", "_blank"); // Substitua pelo seu PNG
 };
 
 // Botão Localização - abre Google Maps
 document.getElementById("localizacao").onclick = () => {
-  window.location.href = "https://maps.app.goo.gl/m6S1Rq3kkYnHofqb7"; // Substitua pelo endereço real
+  window.location.href = "https://maps.app.goo.gl/R1HPwwBndqXfZ7s5A"; // Substitua pelo endereço real
 };
 
 // Botão Presentes - abre imagem PNG em nova aba
 document.getElementById("presentes").onclick = () => {
-  window.open("presentes.png", "_blank"); // Substitua pelo seu PNG
+  window.open("assets/presentes.png", "_blank"); // Substitua pelo seu PNG
 };
 </script>
 
