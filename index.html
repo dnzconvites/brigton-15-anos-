@@ -1,8 +1,144 @@
-<div style="position: relative; width: 100%; height: 0; padding-top: 177.7778%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https://www.canva.com/design/DAHB_8_qeq8/vobYJK-fm-2ehaTe05dbuw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-  </iframe>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>15 Anos – Bridgerton</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0d1b2a;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+}
+
+/* imagem principal (com botões desenhados) */
+.container img {
+  width: 100%;
+  display: block;
+}
+
+/* hotspots invisíveis */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+}
+
+/* ===== MAPEAMENTO DOS BOTÕES ===== */
+/* (baseado na sua imagem enviada) */
+
+/* BOTÃO 1 – CONFIRMAR PRESENÇA */
+#btn-confirmar {
+  top: 64%;
+  left: 12%;
+  width: 76%;
+  height: 6%;
+}
+
+/* BOTÃO 2 – DRESS CODE */
+#btn-dress {
+  top: 71%;
+  left: 12%;
+  width: 76%;
+  height: 6%;
+}
+
+/* BOTÃO 3 – LOCALIZAÇÃO */
+#btn-local {
+  top: 78%;
+  left: 12%;
+  width: 76%;
+  height: 6%;
+}
+
+/* BOTÃO 4 – PRESENTES */
+#btn-presentes {
+  top: 85%;
+  left: 12%;
+  width: 76%;
+  height: 6%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 🎵 Música -->
+  <audio id="bgMusic" src="assets/musica.mp3" loop></audio>
+
+  <!-- 🎬 Vídeo Lady Whistledown -->
+  <video id="introVideo" src="assets/video.mp4" playsinline controls style="width:100%"></video>
+
+  <!-- 🖼️ Arte ORIGINAL (não mexe nela) -->
+  <img src="assets/convite.png" alt="Convite 15 anos Bridgerton">
+
+  <!-- 🔘 Hotspots invisíveis -->
+  <div id="btn-confirmar" class="hotspot" onclick="confirmar()"></div>
+  <div id="btn-dress" class="hotspot" onclick="abrirDress()"></div>
+  <div id="btn-local" class="hotspot" onclick="abrirMapa()"></div>
+  <div id="btn-presentes" class="hotspot" onclick="abrirPresentes()"></div>
+
 </div>
-<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAHB_8_qeq8&#x2F;vobYJK-fm-2ehaTe05dbuw&#x2F;view?utm_content=DAHB_8_qeq8&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Cópia de 15 anos - Bridgerton </a> de Damares Alves Diniz
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+const video = document.getElementById("introVideo");
+
+/* volumes */
+const MUSIC_NORMAL = 0.6;
+const MUSIC_LOW = 0.15;
+
+/* inicia música no primeiro toque */
+document.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    bgMusic.volume = MUSIC_NORMAL;
+    bgMusic.play();
+  }
+}, { once: true });
+
+/* abaixa música durante o vídeo */
+video.addEventListener("play", () => {
+  bgMusic.volume = MUSIC_LOW;
+});
+
+/* restaura música ao final */
+video.addEventListener("ended", () => {
+  bgMusic.volume = MUSIC_NORMAL;
+});
+
+/* ===== AÇÕES DOS BOTÕES ===== */
+
+function confirmar() {
+  window.location.href = "https://wa.me/5511989957305";
+}
+
+function abrirMapa() {
+  window.open("hhttps://maps.app.goo.gl/XgHkBQdaodyrNbBf7", "_blank");
+}
+
+function abrirDress() {
+  alert("Aqui você pode abrir a tela de Dress Code");
+}
+
+function abrirPresentes() {
+  alert("Aqui você pode abrir a tela de Presentes");
+}
+</script>
+
+</body>
+</html>
