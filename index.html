@@ -21,6 +21,7 @@ html, body {
   background: url("assets/capa.png") no-repeat center;
   background-size: cover;
   z-index: 1000;
+  cursor: pointer;
 }
 
 /* VÍDEO */
@@ -56,11 +57,7 @@ html, body {
   position: absolute;
   z-index: 10;
   cursor: pointer;
-  outline: none;       /* remove o contorno de foco */
-}
-
-.botao:focus {
-  outline: none;       /* remove ao focar com teclado também */
+  outline: none; /* remove quadrado azul */
 }
 
 /* Posicionamento dos botões */
@@ -71,10 +68,10 @@ html, body {
 
 /* MODAL */
 #modal {
- #modal {
   display: none;
   position: fixed;
   inset: 0;
+  background: rgba(0,0,0,0); /* transparente */
   z-index: 2000;
   justify-content: center;
   align-items: center;
@@ -86,14 +83,13 @@ html, body {
 }
 
 #fecharModal {
-  position: fixed;      /* mudar de absolute para fixed */
+  position: absolute;
   top: 10px;
   right: 20px;
   font-size: 2rem;
   color: white;
   cursor: pointer;
-  background: none;     /* garante que não tem fundo */
-}
+  background: none;
 }
 </style>
 </head>
@@ -113,7 +109,6 @@ html, body {
 <!-- CONVITE -->
 <div id="convite">
   <img id="conviteImg" src="assets/convite.png">
-
   <div id="confirmar" class="botao"></div>
   <div id="dresscode" class="botao"></div>
   <div id="localizacao" class="botao"></div>
@@ -136,10 +131,12 @@ const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modalImg");
 const fecharModal = document.getElementById("fecharModal");
 
-/* CONFIGURAÇÕES AUTOMÁTICAS */
-const numeroWhats = "5511989957305";   // seu número WhatsApp
-const mensagemConfirmacao = "Olá gostaria de confirmar minha presença!";
-const enderecoMaps = "maps.app.goo.gl/qyRBnHzBeMmVGx8L6";    // endereço do evento
+/* ===== CONFIGURAÇÕES ===== */
+// ➤ Alterar apenas estes dois valores:
+const numeroWhats = "5511989957305"; // seu número WhatsApp
+const linkMaps = "https://maps.app.goo.gl/jPCGobgf5VKBB4sK9"; // link direto do Maps
+
+const mensagemConfirmacao = "Olá, gostaria de confirmar minha presença!";
 
 /* ===== ABRIR CAPA ===== */
 capa.addEventListener("click", () => {
@@ -159,7 +156,7 @@ video.onended = () => {
 
 /* ===== BOTÕES ===== */
 document.getElementById("confirmar").onclick = () => {
-  window.location.href = "https://wa.me/" + numeroWhats + "?text=" + encodeURIComponent(mensagemConfirmacao);
+  window.open("https://wa.me/" + numeroWhats + "?text=" + encodeURIComponent(mensagemConfirmacao), "_blank");
 };
 
 document.getElementById("dresscode").onclick = () => {
@@ -173,10 +170,10 @@ document.getElementById("presentes").onclick = () => {
 };
 
 document.getElementById("localizacao").onclick = () => {
-  window.location.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(enderecoMaps);
+  window.open(linkMaps, "_blank");
 };
 
-/* FECHAR MODAL */
+/* ===== FECHAR MODAL ===== */
 fecharModal.onclick = () => {
   modal.style.display = "none";
 };
